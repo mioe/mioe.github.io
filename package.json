@@ -5,9 +5,15 @@
 		"dev": "nuxt dev --port 5173",
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
-		"postinstall": "nuxt prepare"
+		"postinstall": "nuxt prepare",
+		"story:dev": "histoire dev",
+		"story:build": "histoire build",
+		"story:preview": "histoire preview"
 	},
 	"devDependencies": {
+		"@histoire/plugin-nuxt": "^0.11.6",
+		"@histoire/plugin-vue": "^0.11.6",
+		"histoire": "^0.11.6",
 		"nuxt": "3.0.0-rc.13"
 	}
 }
