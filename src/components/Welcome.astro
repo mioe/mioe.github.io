@@ -1,5 +1,12 @@
 <script>
-	console.log('🦕 hello world')
+	import WindowManager from '../libs/WindowManager'
+
+	if (new URLSearchParams(window.location.search).get('clear')) {
+		localStorage.clear()
+	} else {
+		const wm = new WindowManager()
+		console.log('🦕 hello world', wm)
+	}
 </script>
 
 <article>
