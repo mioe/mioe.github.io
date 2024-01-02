@@ -1,11 +1,51 @@
 <script>
 	import WindowManager from '../libs/WindowManager'
 
+	let windowManager: any = undefined
+	let initialized = false
+
 	if (new URLSearchParams(window.location.search).get('clear')) {
 		localStorage.clear()
 	} else {
-		const wm = new WindowManager()
-		console.log('🦕 hello world', wm)
+		// this code is essential to circumvent that some browsers preload the content of some pages before you actually hit the url
+		document.addEventListener('visibilitychange', () => {
+			if (document.visibilityState != 'hidden' && !initialized) {
+				init()
+			}
+		})
+
+		window.onload = () => {
+			if (document.visibilityState != 'hidden') {
+				init()
+			}
+		}
+
+		function init() {
+			initialized = true
+
+			// add a short timeout because window.offsetX reports wrong values before a short period
+			setTimeout(() => {
+				setupWindowManager()
+				console.log('🦕 init', windowManager)
+			}, 500)
+		}
+
+		function setupWindowManager() {
+			console.log('🦕 setupWindowManager')
+
+			windowManager = new WindowManager()
+			// windowManager.setWinShapeChangeCallback(updateWindowShape)
+			// windowManager.setWinChangeCallback(windowsUpdated)
+
+			// here you can add your custom metadata to each windows instance
+			let metaData = { foo: 'bar' }
+
+			// this will init the windowmanager and add this window to the centralised pool of windows
+			windowManager.init(metaData)
+
+			// call update windows initially (it will later be called by the win change callback)
+			// windowsUpdated()
+		}
 	}
 </script>
 
