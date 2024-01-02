@@ -4,6 +4,9 @@
 	let windowManager: any = undefined
 	let initialized = false
 
+	let sceneOffsetTarget = { x: 0, y: 0 }
+	let sceneOffset = { x: 0, y: 0 }
+
 	if (new URLSearchParams(window.location.search).get('clear')) {
 		localStorage.clear()
 	} else {
@@ -26,6 +29,9 @@
 			// add a short timeout because window.offsetX reports wrong values before a short period
 			setTimeout(() => {
 				setupWindowManager()
+				resize()
+				updateWindowShape(false)
+				window.addEventListener('resize', resize)
 				console.log('🦕 init', windowManager)
 			}, 500)
 		}
@@ -34,8 +40,8 @@
 			console.log('🦕 setupWindowManager')
 
 			windowManager = new WindowManager()
-			// windowManager.setWinShapeChangeCallback(updateWindowShape)
-			// windowManager.setWinChangeCallback(windowsUpdated)
+			windowManager.setWinShapeChangeCallback(updateWindowShape)
+			windowManager.setWinChangeCallback(windowsUpdated)
 
 			// here you can add your custom metadata to each windows instance
 			let metaData = { foo: 'bar' }
@@ -44,7 +50,30 @@
 			windowManager.init(metaData)
 
 			// call update windows initially (it will later be called by the win change callback)
-			// windowsUpdated()
+			windowsUpdated()
+		}
+
+		function windowsUpdated() {
+			console.log('🦕 windowsUpdated')
+		}
+
+		function updateWindowShape(easing = true) {
+			console.log('🦕 updateWindowShape')
+			// storing the actual offset in a proxy that we update against in the render function
+			sceneOffsetTarget = {
+				x: -window.screenX,
+				y: -window.screenY,
+			}
+			if (!easing) {
+				sceneOffset = sceneOffsetTarget
+			}
+		}
+
+		function resize() {
+			console.log('🦕 resize')
+			// resize the renderer to fit the window size
+			let width = window.innerWidth
+			let height = window.innerHeight
 		}
 	}
 </script>
