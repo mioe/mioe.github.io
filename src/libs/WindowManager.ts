@@ -13,14 +13,15 @@ class WindowManager {
 		addEventListener('storage', (ev) => {
 			if (ev.key == 'windows') {
 				// @ts-ignore
-				let newWindows = JSON.parse(ev.newValue);
-				let winChange = that.#didWindowsChange(that.#windows, newWindows);
+				let newWindows = JSON.parse(ev.newValue)
+				let winChange = that.#didWindowsChange(that.#windows, newWindows)
 
-				that.#windows = newWindows;
+				that.#windows = newWindows
 
-				if (winChange)
-				{
-					if (that.#winChangeCallback) that.#winChangeCallback();
+				if (winChange) {
+					if (that.#winChangeCallback) {
+						that.#winChangeCallback()
+					}
 				}
 			}
 		})
@@ -66,8 +67,8 @@ class WindowManager {
 		this.#winData = {id: this.#id, shape: shape, metaData}
 		this.#windows.push(this.#winData)
 
-		localStorage.setItem('count', this.#count);
-		this.updateWindowsLocalStorage();
+		localStorage.setItem('count', this.#count)
+		this.updateWindowsLocalStorage()
 	}
 
 	getWinShape() {
@@ -82,7 +83,7 @@ class WindowManager {
 	}
 
 	getWindowIndexFromId(id: number) {
-		let index = -1;
+		let index = -1
 
 		for (let i = 0; i < this.#windows.length; i++) {
 			if (this.#windows[i].id == id) {
