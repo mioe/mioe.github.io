@@ -6,3 +6,110 @@ import Welcome from '../components/Welcome.astro'
 <Layout title="Welcome to Astro.">
 	<Welcome />
 </Layout>
+
+<style is:global>
+	/* good default vite styles */
+	:root {
+		font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+		color-scheme: dark;
+		font-synthesis: none;
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		-webkit-text-size-adjust: 100%;
+	}
+
+	/* box sizing rules */
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	/* remove default padding */
+	ul,
+	ol {
+		padding: 0;
+	}
+
+	/* remove default margin */
+	body,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	span,
+	ul,
+	ol,
+	li,
+	figure,
+	figcaption,
+	blockquote,
+	dl,
+	dd {
+		margin: 0;
+	}
+
+	/* set core body defaults */
+	body {
+		min-height: 100vh;
+		scroll-behavior: smooth;
+	}
+
+	/* remove list styles on ul, ol elements with a class attribute */
+	ul,
+	ol {
+		list-style: none;
+	}
+
+	/* a elements that don't have a class get default styles */
+	a:not([class]) {
+		text-decoration-skip-ink: auto;
+	}
+
+	/* make images easier to work with */
+	img {
+		max-width: 100%;
+		display: block;
+	}
+
+	/* remove default button styles */
+	button {
+		all: unset;
+		box-sizing: border-box;
+		cursor: pointer;
+	}
+	button:disabled {
+		opacity: 0.5;
+		cursor: allowed;
+	}
+
+	/* inherit fonts for inputs and buttons */
+	input,
+	button,
+	textarea,
+	select {
+		font: inherit;
+		color: inherit;
+	}
+	input:disabled,
+	button:disabled,
+	textarea:disabled,
+	select:disabled {
+		opacity: 0.5;
+		cursor: allowed;
+	}
+
+	/* remove all animations and transitions for people that prefer not to see them */
+	@media (prefers-reduced-motion: reduce) {
+		* {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
+		}
+	}
+</style>
