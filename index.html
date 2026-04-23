@@ -116,16 +116,22 @@
 				left: 0;
 				right: 0;
 				z-index: 100;
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				padding: 0 clamp(20px, 5vw, 80px);
 				height: 56px;
 				background: color-mix(in oklch, var(--bg) 80%, transparent);
 				backdrop-filter: blur(20px) saturate(1.5);
 				-webkit-backdrop-filter: blur(20px) saturate(1.5);
 				border-bottom: 1px solid var(--border);
 				transition: background 0.3s;
+			}
+
+			.nav-inner {
+				max-width: calc(900px + 2 * clamp(20px, 5vw, 80px));
+				margin: 0 auto;
+				padding: 0 clamp(20px, 5vw, 80px);
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
 			}
 
 			.nav-logo {
@@ -194,7 +200,7 @@
 				min-height: 100svh;
 				display: flex;
 				align-items: center;
-				padding-top: 120px;
+				padding-top: 140px;
 				padding-bottom: 80px;
 			}
 
@@ -428,7 +434,6 @@
 				gap: 0;
 				padding: 40px 0;
 				border-top: 1px solid var(--border);
-				cursor: pointer;
 				transition: background 0.2s;
 			}
 			.exp-item:last-child {
@@ -624,13 +629,16 @@
 
 			/* FOOTER */
 			footer {
-				padding: 32px clamp(20px, 5vw, 80px);
 				border-top: 1px solid var(--border);
+			}
+
+			.footer-inner {
+				max-width: calc(900px + 2 * clamp(20px, 5vw, 80px));
+				margin: 0 auto;
+				padding: 32px clamp(20px, 5vw, 80px);
 				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				flex-wrap: wrap;
-				gap: 16px;
+				flex-direction: column;
+				gap: 20px;
 			}
 
 			.footer-copy {
@@ -1081,43 +1089,43 @@
 					return () => window.removeEventListener('scroll', onScroll)
 				}, [])
 
-				const sectionPad =
-					tweaks.density === 'compact' ? { padding: '60px clamp(20px, 5vw, 80px)' } : {}
-
 				return (
 					<>
 						{/* NAV */}
 						<nav>
-							<a href="#hero" className="nav-logo">
-								mioe.github.io
-							</a>
-							<div className="nav-links nav-mid">
-								<a href="#about">Обо мне</a>
-								<a href="#experience">Опыт</a>
-								<a href="#contact">Контакт</a>
-							</div>
-							<div className="nav-actions">
-								<button
-									className="theme-btn"
-									onClick={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))}
-									title="Сменить тему"
-								>
-									{theme === 'light' ? '🌙' : '☀️'}
-								</button>
-								<a
-									className="btn-primary"
-									href="mailto:jr.dizik@yandex.com"
-									style={{ padding: '8px 18px', fontSize: 13 }}
-								>
-									Связаться
+							<div className="nav-inner">
+								<a href="#hero" className="nav-logo">
+									mioe.github.io
 								</a>
+								<div className="nav-links nav-mid">
+									<a href="#about">Обо мне</a>
+									<a href="#experience">Опыт</a>
+									<a href="#contact">Контакт</a>
+								</div>
+								<div className="nav-actions">
+									<button
+										className="theme-btn"
+										onClick={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))}
+										title="Сменить тему"
+									>
+										{theme === 'light' ? '🌙' : '☀️'}
+									</button>
+									<a
+										className="btn-primary"
+										href="mailto:jr.dizik@yandex.com"
+										style={{ padding: '8px 18px', fontSize: 13 }}
+									>
+										Связаться
+									</a>
+								</div>
 							</div>
 						</nav>
 
 						{/* HERO */}
-						<section id="hero" style={sectionPad}>
+						<section id="hero">
 							<div className="container">
 								<div className="hero-inner">
+									<div className="hero-label">Senior TypeScript Frontend</div>
 									<div
 										style={{
 											display: 'flex',
@@ -1128,7 +1136,6 @@
 										}}
 									>
 										<div style={{ flex: 1, minWidth: 0 }}>
-											<div className="hero-label">Senior TypeScript Frontend</div>
 											<h1 className="hero-name">
 												Misha
 												<br />
@@ -1211,7 +1218,7 @@
 						</section>
 
 						{/* ABOUT */}
-						<section id="about" style={sectionPad}>
+						<section id="about">
 							<div className="container">
 								<Reveal>
 									<div className="section-header">
@@ -1259,7 +1266,7 @@
 						</section>
 
 						{/* EXPERIENCE */}
-						<section id="experience" style={sectionPad}>
+						<section id="experience">
 							<div className="container">
 								<Reveal>
 									<div className="section-header">
@@ -1276,7 +1283,13 @@
 									))}
 								</div>
 
-								<Reveal delay={0.1} style={{ marginTop: 48 }}>
+								<Reveal delay={0.1} style={{ marginTop: 80 }}>
+									<div className="section-header" style={{ marginBottom: 32 }}>
+										<span className="section-num">02.01</span>
+										<h2 className="section-title" style={{ fontSize: 'clamp(22px, 3vw, 32px)' }}>
+											Образование
+										</h2>
+									</div>
 									<div
 										style={{
 											display: 'flex',
@@ -1284,17 +1297,15 @@
 											gap: 16,
 											padding: '24px 0',
 											borderTop: '1px solid var(--border)',
+											borderBottom: '1px solid var(--border)',
 										}}
 									>
 										<div>
-											<div style={{ fontSize: 13, color: 'var(--fg3)', fontFamily: 'var(--mono)' }}>
-												Образование
-											</div>
-											<div style={{ fontSize: 16, fontWeight: 400, marginTop: 4 }}>
+											<div style={{ fontSize: 16, fontWeight: 400 }}>
 												ДГТУ — Прикладная информатика
 											</div>
-											<div style={{ fontSize: 13, color: 'var(--fg3)', marginTop: 2 }}>
-												Ростов-на-Дону, 2020
+											<div style={{ fontSize: 13, color: 'var(--fg3)', marginTop: 4 }}>
+												Ростов-на-Дону · 2020
 											</div>
 										</div>
 									</div>
@@ -1303,7 +1314,7 @@
 						</section>
 
 						{/* CONTACT */}
-						<section id="contact" style={sectionPad}>
+						<section id="contact">
 							<div className="container">
 								<Reveal>
 									<div className="section-header">
@@ -1394,51 +1405,53 @@
 						</section>
 
 						{/* FOOTER */}
-						<footer style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 20 }}>
-							<div className="footer-copy">© 2026 Misha Gezha</div>
-							<div className="footer-links" style={{ flexWrap: 'wrap', gap: '12px 20px' }}>
-								<a href="https://github.com/mioe" target="_blank" rel="noopener">
-									GitHub
-								</a>
-								<a href="https://mioe.github.io" target="_blank" rel="noopener">
-									mioe.github.io
-								</a>
-								<a href="https://career.habr.com/mioe" target="_blank" rel="noopener">
-									Habr
-								</a>
-								<a
-									href="https://hh.ru/resume/9733c62dff0ff5e79e0039ed1f764c58786677"
-									target="_blank"
-									rel="noopener"
+						<footer>
+							<div className="footer-inner">
+								<div className="footer-copy">© 2026 Misha Gezha</div>
+								<div className="footer-links" style={{ flexWrap: 'wrap', gap: '12px 20px' }}>
+									<a href="https://github.com/mioe" target="_blank" rel="noopener">
+										GitHub
+									</a>
+									<a href="https://mioe.github.io" target="_blank" rel="noopener">
+										mioe.github.io
+									</a>
+									<a href="https://career.habr.com/mioe" target="_blank" rel="noopener">
+										Habr
+									</a>
+									<a
+										href="https://hh.ru/resume/9733c62dff0ff5e79e0039ed1f764c58786677"
+										target="_blank"
+										rel="noopener"
+									>
+										HH.ru
+									</a>
+									<a href="https://tenchat.ru/mioe" target="_blank" rel="noopener">
+										TenChat
+									</a>
+									<a
+										href="https://setka.ru/users/019d34d4-a62c-79c0-979a-be286c89fe10"
+										target="_blank"
+										rel="noopener"
+									>
+										Setka
+									</a>
+									<a href="https://www.linkedin.com/in/mmioe" target="_blank" rel="noopener">
+										LinkedIn
+									</a>
+								</div>
+								<div
+									style={{
+										fontSize: 11,
+										fontFamily: 'var(--mono)',
+										color: 'var(--fg3)',
+										display: 'flex',
+										alignItems: 'center',
+										gap: 8,
+										flexWrap: 'wrap',
+									}}
 								>
-									HH.ru
-								</a>
-								<a href="https://tenchat.ru/mioe" target="_blank" rel="noopener">
-									TenChat
-								</a>
-								<a
-									href="https://setka.ru/users/019d34d4-a62c-79c0-979a-be286c89fe10"
-									target="_blank"
-									rel="noopener"
-								>
-									Setka
-								</a>
-								<a href="https://www.linkedin.com/in/mmioe" target="_blank" rel="noopener">
-									LinkedIn
-								</a>
-							</div>
-							<div
-								style={{
-									fontSize: 11,
-									fontFamily: 'var(--mono)',
-									color: 'var(--fg3)',
-									display: 'flex',
-									alignItems: 'center',
-									gap: 8,
-									flexWrap: 'wrap',
-								}}
-							>
-								<span>Создано с помощью · Claude Opus 4.7 · Design Mode · 20 апреля 2026</span>
+									<span>Создано с помощью · Claude Opus 4.7 · Design Mode · 20 апреля 2026</span>
+								</div>
 							</div>
 						</footer>
 
