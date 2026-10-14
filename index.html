@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <meta name="description" content="mioe - a portfolio rendered as a Zed window with gpui and WebAssembly">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>mioe</title>
+  <style>
+    :root { --bg: #ffffff; --fg: #242529; --muted: #6b6d72; --accent: #3f6fd9; --track: #d4d4d6; }
+    @media (prefers-color-scheme: dark) { :root { --bg: #000000; --fg: #ffffff; --muted: #8e8e93; --accent: #0a84ff; --track: #38383a; } }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg); position: fixed; inset: 0; overscroll-behavior: none; }
+    body > canvas {
+      position: fixed; inset: 0; display: block; width: 100%; height: 100%;
+      touch-action: none; outline: none; -webkit-user-select: none; user-select: none;
+    }
+    #init { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; background: var(--bg); color: var(--fg); font: 15px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; transition: opacity 0.25s ease; z-index: 1; }
+    #init.is-done { opacity: 0; pointer-events: none; }
+    #init .init-title { font-size: 22px; font-weight: 600; letter-spacing: 0.01em; }
+    #init .init-bar { width: 160px; height: 3px; border-radius: 2px; background: var(--track); overflow: hidden; }
+    #init .init-bar span { display: block; width: 40%; height: 100%; border-radius: 2px; background: var(--accent); animation: init-slide 1.1s ease-in-out infinite; }
+    #init .init-hint { color: var(--muted); font-size: 13px; max-width: 80vw; text-align: center; word-break: break-word; }
+    #init.is-failed .init-bar { display: none; }
+    #init.is-failed .init-hint { color: #c43c3c; }
+    @keyframes init-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(250%); } }
+    @media (prefers-reduced-motion: reduce) { #init .init-bar span { animation: none; width: 100%; opacity: 0.6; } #init { transition: none; } }
+  </style>
+</head>
+<body>
+  <div id="init" role="status" aria-live="polite" ontransitionend="this.remove()">
+    <div class="init-title">mioe</div>
+    <div class="init-bar"><span></span></div>
+    <div class="init-hint">Loading the window</div>
+  </div>
+  <noscript>This page needs JavaScript and WebAssembly.</noscript>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
